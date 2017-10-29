@@ -15,6 +15,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -266,6 +267,21 @@ public class QuizActivity extends Activity implements View.OnClickListener {
                     System.out.println(quizResult[i]);
                     System.out.println(quizTime[i]);
                 }
+
+                Intent intent = new Intent(getBaseContext(), QuizResult.class);
+                ArrayList<String> quizOrder = new ArrayList<String>();
+                ArrayList<String> quizStatus = new ArrayList<String>();
+                ArrayList<String> quizDuration = new ArrayList<String>();
+
+                // Sample Data
+                quizOrder.add("1"); quizStatus.add("Success"); quizDuration.add("1 min, 1 sec");
+                quizOrder.add("2"); quizStatus.add("Success"); quizDuration.add("1 min, 1 sec");
+                quizOrder.add("3"); quizStatus.add("Success"); quizDuration.add("1 min, 1 sec");
+                quizOrder.add("4"); quizStatus.add("Success"); quizDuration.add("1 min, 1 sec");
+                intent.putStringArrayListExtra("quizOrder", quizOrder);
+                intent.putStringArrayListExtra("quizStatus", quizStatus);
+                intent.putStringArrayListExtra("quizDuration", quizDuration);
+                startActivity(intent);
             }
         }
     }
