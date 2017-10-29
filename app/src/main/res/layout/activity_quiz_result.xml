@@ -4,7 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true">
+
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff">
@@ -94,63 +96,18 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_listTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:padding="10dip"
+            android:padding="5dip"
             android:layout_below="@+id/ll_resultList">
-
-            <!--  List Title  -->
-            <TextView
+            <Button
+                android:id="@+id/btn_showDetail"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:text="Order"/>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:text="Status"/>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:text="Duration"/>
+                android:textColor="#8583b7"
+                android:text="Show Details"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_listContent"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            android:padding="10dip"
-            android:layout_below="@+id/ll_listTitle">
-
-            <!--  List Content  -->
-            <TextView
-                android:id="@+id/tv_quizOrder"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"/>
-            <TextView
-                android:id="@+id/tv_quizStatus"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"/>
-            <TextView
-                android:id="@+id/tv_quizDuration"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"/>
-        </LinearLayout>
     </RelativeLayout>
+
 </ScrollView>

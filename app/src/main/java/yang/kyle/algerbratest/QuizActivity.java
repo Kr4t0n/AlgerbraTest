@@ -16,6 +16,7 @@ import org.w3c.dom.Text;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -27,6 +28,8 @@ public class QuizActivity extends Activity implements View.OnClickListener {
     int a, b, c;
     // To count the number of quiz completed
     int quizCount = 0;
+    // Initialize the quiz order
+    String[] quizOrder = new String[10];
     // Store the time each equation spent
     Long timeA, timeB, duration;
     String[] quizTime = new String[10];
@@ -34,6 +37,10 @@ public class QuizActivity extends Activity implements View.OnClickListener {
     String[] quizResult = new String[10];
     // String inside the intent
     String studentName, universityNo;
+    // Conclude the correct, wrong and skipped number;
+    int correctNum, wrongNum, skipNum;
+    // ArrayList to transfer the data of quizTime and quizResult
+    ArrayList<String> quizTimeList, quizResultList, quizOrderList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +139,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
             }
             quizCount++;
         }
+        quizOrder[quizCount - 1] = Integer.toString(quizCount - 1);
     }
 
     public void algebraVerify() {
@@ -246,6 +254,17 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    protected int checkStatus(String status) {
+        int statusCount = 0;
+        for (int i = 0; i < 10; i++) {
+            if (quizResult[i] == status) {
+                statusCount++;
+            }
+        }
+
+        return statusCount;
+    }
+
     @Override
     public void onClick(View v) {
         // TODO Quiz method sub
@@ -263,24 +282,25 @@ public class QuizActivity extends Activity implements View.OnClickListener {
             else {
                 recordDuration();
                 checkAnsStatus();
-                for (int i = 0; i < 10; i++) {
-                    System.out.println(quizResult[i]);
-                    System.out.println(quizTime[i]);
-                }
+
+                correctNum = checkStatus("Correct");
+                wrongNum = checkStatus("Wrong");
+                skipNum = checkStatus("Not Answered");
+
+                quizTimeList = new ArrayList<String>(Arrays.asList(quizTime));
+                quizResultList = new ArrayList<String>(Arrays.asList(quizResult));
+                quizOrderList = new ArrayList<String>(Arrays.asList(quizOrder));
 
                 Intent intent = new Intent(getBaseContext(), QuizResult.class);
-                ArrayList<String> quizOrder = new ArrayList<String>();
-                ArrayList<String> quizStatus = new ArrayList<String>();
-                ArrayList<String> quizDuration = new ArrayList<String>();
+                intent.putExtra("studentName", studentName);
+                intent.putExtra("universityNo", universityNo);
+                intent.putExtra("correctNum", correctNum);
+                intent.putExtra("wrongNum", wrongNum);
+                intent.putExtra("skipNum", skipNum);
+                intent.putStringArrayListExtra("quizOrderList", quizOrderList);
+                intent.putStringArrayListExtra("quizTimeList", quizTimeList);
+                intent.putStringArrayListExtra("quizResultList", quizResultList);
 
-                // Sample Data
-                quizOrder.add("1"); quizStatus.add("Success"); quizDuration.add("1 min, 1 sec");
-                quizOrder.add("2"); quizStatus.add("Success"); quizDuration.add("1 min, 1 sec");
-                quizOrder.add("3"); quizStatus.add("Success"); quizDuration.add("1 min, 1 sec");
-                quizOrder.add("4"); quizStatus.add("Success"); quizDuration.add("1 min, 1 sec");
-                intent.putStringArrayListExtra("quizOrder", quizOrder);
-                intent.putStringArrayListExtra("quizStatus", quizStatus);
-                intent.putStringArrayListExtra("quizDuration", quizDuration);
                 startActivity(intent);
             }
         }
