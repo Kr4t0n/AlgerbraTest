@@ -42,7 +42,8 @@
                 android:layout_marginBottom="20dip"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#372c24"
-                android:text="Algebra Question"/>
+                android:text="Algebra Question"
+                android:editable="true"/>
 
             <!--  Answer field  -->
             <EditText
@@ -51,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:layout_marginBottom="20dip"
-                android:textColor="#dcdcdc"
-                android:text="2 decimal allowed for non integer."
+                android:textColor="#000000"
+                android:text=""
                 android:singleLine="true"/>
             <EditText
                 android:id="@+id/txt_ans2"
@@ -60,8 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:layout_marginBottom="20dip"
-                android:textColor="#dcdcdc"
-                android:text="2 decimal allowed for non integer."
+                android:textColor="#000000"
+                android:text=""
                 android:singleLine="true"/>
 
             <!--  Checking field  -->
@@ -71,7 +72,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#8583b7"
-                android:text="Submit to reveal your answer!"/>
+                android:text="Submit to reveal your answer!"
+                android:editable="true"/>
         </LinearLayout>
 
         <!--  Button Part  -->

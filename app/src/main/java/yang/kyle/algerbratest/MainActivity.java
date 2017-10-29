@@ -1,6 +1,7 @@
 package yang.kyle.algerbratest;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +30,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         // TODO Auto-generated method stub
         if (v.getId() == R.id.btn_startQuiz) {
-            // Do Something
+            String studentName = txt_studentName.getText().toString();
+            String universityNo = txt_universityNo.getText().toString();
+
+            Intent intent = new Intent(getBaseContext(), QuizActivity.class);
+            intent.putExtra("studentName", studentName);
+            intent.putExtra("universityNo", universityNo);
+            startActivity(intent);
         }
     }
 }
