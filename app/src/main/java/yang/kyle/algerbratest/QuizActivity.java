@@ -3,6 +3,7 @@ package yang.kyle.algerbratest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.sql.Time;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class QuizActivity extends Activity implements View.OnClickListener {
     TextView tv_algQuiz, tv_checkResult;
@@ -23,6 +26,13 @@ public class QuizActivity extends Activity implements View.OnClickListener {
     int a, b, c;
     // To count the number of quiz completed
     int quizCount = 0;
+    // Store the time each equation spent
+    Long timeA, timeB, duration;
+    String[] quizTime = new String[10];
+    // Store the result of each equation
+    String[] quizResult = new String[10];
+    // String inside the intent
+    String studentName, universityNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +46,15 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         btn_submitAns = (Button)findViewById(R.id.btn_submitAns);
         btn_next = (Button)findViewById(R.id.btn_next);
 
+        Intent intent = this.getIntent();
+        studentName = intent.getStringExtra("studentName");
+        universityNo = intent.getStringExtra("universityNo");
+
         btn_submitAns.setOnClickListener(this);
         btn_next.setOnClickListener(this);
 
         algebraTest();
+        timeA = System.currentTimeMillis();
     }
 
     public int randGenerator() {
@@ -119,7 +134,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
     }
 
     public void algebraVerify() {
-        if (quizCount < 5) {
+        if (quizCount - 1 < 5) {
             Double ans;
             Double correctAns = (-b) / (double)a;
             String ansVerifyResult;
@@ -128,9 +143,11 @@ public class QuizActivity extends Activity implements View.OnClickListener {
                 ans = Double.parseDouble(txt_ans1.getText().toString());
                 if (areEqual(ans, correctAns)) {
                     ansVerifyResult = "Correct!";
+                    quizResult[quizCount - 1] = "Correct";
                 }
                 else {
                     ansVerifyResult = "Wrong! The correct result is " + Double.toString(Math.round(correctAns * 100) / 100.0d) + " !";
+                    quizResult[quizCount - 1] = "Wrong";
                 }
                 tv_checkResult.setText(ansVerifyResult);
                 btn_submitAns.setEnabled(false);
@@ -139,7 +156,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
                 showNumMessage();
             }
         }
-        else if (quizCount < 10) {
+        else if (quizCount - 1 < 10) {
             Double ans1, ans2;
             int delta = b * b - 4 * a * c;
             Double correctAns1 = (-b + Math.sqrt((double) delta)) / (2 * a);
@@ -151,9 +168,11 @@ public class QuizActivity extends Activity implements View.OnClickListener {
                     ans1 = Double.parseDouble(txt_ans1.getText().toString());
                     if (areEqual(ans1, correctAns1)) {
                         ansVerifyResult = "Correct!";
+                        quizResult[quizCount - 1] = "Correct";
                     }
                     else {
                         ansVerifyResult = "Wrong! The correct result is " + Double.toString(Math.round(correctAns1 * 100) / 100.0d) + " !";
+                        quizResult[quizCount - 1] = "Wrong";
                     }
                     tv_checkResult.setText(ansVerifyResult);
                     btn_submitAns.setEnabled(false);
@@ -173,9 +192,11 @@ public class QuizActivity extends Activity implements View.OnClickListener {
                     }
                     if (areEqual(ans1, correctAns1) && areEqual(ans2, correctAns2)) {
                         ansVerifyResult = "Correct!";
+                        quizResult[quizCount - 1] = "Correct";
                     }
                     else {
                         ansVerifyResult = "Wrong! The correct result is " + Double.toString(Math.round(correctAns1 * 100) / 100.0d) + " and " + Double.toString(Math.round(correctAns2 * 100) / 100.d) + " !";
+                        quizResult[quizCount - 1] = "Wrong";
                     }
                     tv_checkResult.setText(ansVerifyResult);
                     btn_submitAns.setEnabled(false);
@@ -210,6 +231,20 @@ public class QuizActivity extends Activity implements View.OnClickListener {
                 .show();
     }
 
+    protected void recordDuration() {
+        timeB = System.currentTimeMillis();
+        duration = timeB - timeA;
+        quizTime[quizCount - 1] = String.format("%02d min, %02d sec",
+                TimeUnit.MILLISECONDS.toMinutes(duration),
+                TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MILLISECONDS.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+    }
+
+    protected void checkAnsStatus() {
+        if (btn_submitAns.isEnabled()) {
+            quizResult[quizCount - 1] = "Not Answered";
+        }
+    }
+
     @Override
     public void onClick(View v) {
         // TODO Quiz method sub
@@ -218,8 +253,19 @@ public class QuizActivity extends Activity implements View.OnClickListener {
         }
         if (v.getId() == R.id.btn_next) {
             if (quizCount < 10) {
+                recordDuration();
+                checkAnsStatus();
                 btn_submitAns.setEnabled(true);
                 algebraTest();
+                timeA = System.currentTimeMillis();
+            }
+            else {
+                recordDuration();
+                checkAnsStatus();
+                for (int i = 0; i < 10; i++) {
+                    System.out.println(quizResult[i]);
+                    System.out.println(quizTime[i]);
+                }
             }
         }
     }
