@@ -139,7 +139,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
             }
             quizCount++;
         }
-        quizOrder[quizCount - 1] = Integer.toString(quizCount - 1);
+        quizOrder[quizCount - 1] = Integer.toString(quizCount);
     }
 
     public void algebraVerify() {
@@ -267,7 +267,6 @@ public class QuizActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        // TODO Quiz method sub
         if (v.getId() == R.id.btn_submitAns) {
             algebraVerify();
         }

@@ -1,7 +1,10 @@
 package yang.kyle.algerbratest;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,15 +31,29 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
         if (v.getId() == R.id.btn_startQuiz) {
             String studentName = txt_studentName.getText().toString();
             String universityNo = txt_universityNo.getText().toString();
-
-            Intent intent = new Intent(getBaseContext(), QuizActivity.class);
-            intent.putExtra("studentName", studentName);
-            intent.putExtra("universityNo", universityNo);
-            startActivity(intent);
+            
+            if (studentName.matches("") || universityNo.matches("")) {
+                new AlertDialog.Builder(this)
+                        .setMessage("Please fill in the personal information!")
+                        .setTitle("Personal Information Error!")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // Just dismiss this message
+                            }
+                        })
+                        .show();
+            }
+            else {
+                Intent intent = new Intent(getBaseContext(), QuizActivity.class);
+                intent.putExtra("studentName", studentName);
+                intent.putExtra("universityNo", universityNo);
+                startActivity(intent);
+            }
         }
     }
 }
