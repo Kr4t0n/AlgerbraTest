@@ -96,10 +96,35 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_timeList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dip"
+            android:layout_below="@+id/ll_resultList">
+
+            <!--  Average Time Result  -->
+            <TextView
+                android:id="@+id/tv_linearTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:textColor="#000000"
+                android:text="Average time spent on Linear equations: "/>
+            <TextView
+                android:id="@+id/tv_quadraticTime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:textColor="#000000"
+                android:text="Average time spent on Quadratic equations: "/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="5dip"
-            android:layout_below="@+id/ll_resultList">
+            android:layout_below="@+id/ll_timeList">
             <Button
                 android:id="@+id/btn_showDetail"
                 android:layout_width="fill_parent"

@@ -32,6 +32,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
     String[] quizOrder = new String[10];
     // Store the time each equation spent
     Long timeA, timeB, duration;
+    String[] quizDuration = new String[10];
     String[] quizTime = new String[10];
     // Store the result of each equation
     String[] quizResult = new String[10];
@@ -40,7 +41,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
     // Conclude the correct, wrong and skipped number;
     int correctNum, wrongNum, skipNum;
     // ArrayList to transfer the data of quizTime and quizResult
-    ArrayList<String> quizTimeList, quizResultList, quizOrderList;
+    ArrayList<String> quizTimeList, quizResultList, quizOrderList, quizDurationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -244,6 +245,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
     protected void recordDuration() {
         timeB = System.currentTimeMillis();
         duration = timeB - timeA;
+        quizDuration[quizCount - 1] = Long.toString(duration);
         quizTime[quizCount - 1] = String.format("%02d min, %02d sec",
                 TimeUnit.MILLISECONDS.toMinutes(duration),
                 TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.MILLISECONDS.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
@@ -290,6 +292,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
                 quizTimeList = new ArrayList<String>(Arrays.asList(quizTime));
                 quizResultList = new ArrayList<String>(Arrays.asList(quizResult));
                 quizOrderList = new ArrayList<String>(Arrays.asList(quizOrder));
+                quizDurationList = new ArrayList<String>(Arrays.asList(quizDuration));
 
                 Intent intent = new Intent(getBaseContext(), QuizResult.class);
                 intent.putExtra("studentName", studentName);
@@ -300,6 +303,7 @@ public class QuizActivity extends Activity implements View.OnClickListener {
                 intent.putStringArrayListExtra("quizOrderList", quizOrderList);
                 intent.putStringArrayListExtra("quizTimeList", quizTimeList);
                 intent.putStringArrayListExtra("quizResultList", quizResultList);
+                intent.putStringArrayListExtra("quizDurationList", quizDurationList);
 
                 startActivity(intent);
             }
