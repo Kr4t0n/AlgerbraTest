@@ -194,11 +194,12 @@ public class QuizActivity extends Activity implements View.OnClickListener {
                 try {
                     ans1 = Double.parseDouble(txt_ans1.getText().toString());
                     ans2 = Double.parseDouble(txt_ans2.getText().toString());
-                    if (ans1 < ans2) {
+                    if ((a > 0 && ans1 < ans2) || (a < 0 && ans1 > ans2)){
                         Double temp = ans1;
                         ans1 = ans2;
                         ans2 = temp;
                     }
+
                     if (areEqual(ans1, correctAns1) && areEqual(ans2, correctAns2)) {
                         ansVerifyResult = "Correct!";
                         quizResult[quizCount - 1] = "Correct";
