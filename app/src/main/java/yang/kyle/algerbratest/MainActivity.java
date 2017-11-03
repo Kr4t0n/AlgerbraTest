@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends Activity implements View.OnClickListener {
-    EditText txt_studentName, txt_universityNo;
+    // EditText txt_studentName, txt_universityNo;
     Button btn_startQuiz;
 
     @Override
@@ -21,8 +21,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         btn_startQuiz = (Button)findViewById(R.id.btn_startQuiz);
-        txt_studentName = (EditText)findViewById(R.id.txt_studentName);
-        txt_universityNo = (EditText)findViewById(R.id.txt_universityNo);
+        // txt_studentName = (EditText)findViewById(R.id.txt_studentName);
+        // txt_universityNo = (EditText)findViewById(R.id.txt_universityNo);
 
         // Register the startQuiz button to click listener
         // Whenever the button is clicked, onClick is called
@@ -32,8 +32,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_startQuiz) {
-            String studentName = txt_studentName.getText().toString();
-            String universityNo = txt_universityNo.getText().toString();
+            // String studentName = txt_studentName.getText().toString();
+            // String universityNo = txt_universityNo.getText().toString();
+            String studentName = "Yang Zhengkai";
+            String universityNo = "3035455084";
             
             if (studentName.matches("") || universityNo.matches("")) {
                 new AlertDialog.Builder(this)

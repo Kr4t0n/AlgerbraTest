@@ -37,29 +37,33 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#372c24"
-                android:text="Student Name"/>
-            <EditText
-                android:id="@+id/txt_studentName"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
                 android:layout_marginBottom="20dip"
-                android:singleLine="true"/>
+                android:textColor="#372c24"
+                android:text="Student Name: Yang Zhengkai"/>
+            <!--<EditText-->
+                <!--android:id="@+id/txt_studentName"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="5dip"-->
+                <!--android:layout_marginBottom="20dip"-->
+                <!--android:singleLine="true"-->
+                <!--android:text="Yang Zhengkai"/>-->
 
             <!--  University No. Label  -->
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
                 android:textColor="#372c24"
-                android:text="University No."/>
-            <EditText
-                android:id="@+id/txt_universityNo"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
-                android:layout_marginBottom="10dip"
-                android:singleLine="true"/>
+                android:text="University No.: 3035455084"/>
+            <!--<EditText-->
+                <!--android:id="@+id/txt_universityNo"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="5dip"-->
+                <!--android:layout_marginBottom="10dip"-->
+                <!--android:singleLine="true"-->
+                <!--android:text="3035455084"/>-->
 
             <!--  Start Test Button  -->
             <Button
