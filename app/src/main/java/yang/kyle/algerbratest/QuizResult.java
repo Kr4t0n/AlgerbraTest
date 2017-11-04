@@ -21,7 +21,7 @@ public class QuizResult extends Activity implements View.OnClickListener {
     TextView tv_studentName, tv_universityNo, tv_correctNum, tv_wrongNum, tv_skipNum;
     TextView tv_linearTime, tv_quadraticTime;
     int averageLinearTime, averageQuadraticTime;
-    Button btn_showDetail;
+    Button btn_showDetail, btn_restartQuiz, btn_quit;
     // String inside the intent
     String studentName, universityNo;
     // Integer inside the intent
@@ -43,6 +43,8 @@ public class QuizResult extends Activity implements View.OnClickListener {
         tv_linearTime = (TextView)findViewById(R.id.tv_linearTime);
         tv_quadraticTime = (TextView)findViewById(R.id.tv_quadraticTime);
         btn_showDetail = (Button)findViewById(R.id.btn_showDetail);
+        btn_restartQuiz = (Button)findViewById(R.id.btn_restartQuiz);
+        btn_quit = (Button)findViewById(R.id.btn_quit);
 
         Intent intent = this.getIntent();
         studentName = intent.getStringExtra("studentName");
@@ -57,8 +59,8 @@ public class QuizResult extends Activity implements View.OnClickListener {
 
         averageLinearTime = calAverageDuration(quizResultList, quizDurationList, 0, 5);
         averageQuadraticTime = calAverageDuration(quizResultList, quizDurationList, 5, 10);
-        tv_linearTime.setText("Average time spent on Linear equations: " + intToTime(averageLinearTime));
-        tv_quadraticTime.setText("Average time spent on Quadratic equations: " + intToTime(averageQuadraticTime));
+        tv_linearTime.setText("Average time spent on Linear equations: \n\t" + intToTime(averageLinearTime));
+        tv_quadraticTime.setText("Average time spent on Quadratic equations: \n\t" + intToTime(averageQuadraticTime));
 
         tv_studentName.setText("Student Name: " + studentName);
         tv_universityNo.setText("University No: " + universityNo);
@@ -67,6 +69,8 @@ public class QuizResult extends Activity implements View.OnClickListener {
         tv_skipNum.setText("Skipped Num: " + Integer.toString(skipNum));
 
         btn_showDetail.setOnClickListener(this);
+        btn_restartQuiz.setOnClickListener(this);
+        btn_quit.setOnClickListener(this);
     }
 
     public int calAverageDuration(ArrayList<String> quizResultList, ArrayList<String> quizDurationList, int startPoint, int endPoint) {
@@ -99,6 +103,14 @@ public class QuizResult extends Activity implements View.OnClickListener {
             intent.putStringArrayListExtra("quizResultList", quizResultList);
 
             startActivity(intent);
+        }
+        else if (v.getId() == R.id.btn_restartQuiz) {
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            finish();
+            startActivity(intent);
+        }
+        else if (v.getId() == R.id.btn_quit) {
+            finishAffinity();
         }
     }
 }

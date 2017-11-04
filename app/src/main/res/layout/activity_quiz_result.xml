@@ -123,6 +123,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="5dip"
             android:layout_below="@+id/ll_timeList">
             <Button
@@ -131,6 +132,18 @@
                 android:layout_height="wrap_content"
                 android:textColor="#8583b7"
                 android:text="Show Details"/>
+            <Button
+                android:id="@+id/btn_restartQuiz"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#8583b7"
+                android:text="Restart Quiz"/>
+            <Button
+                android:id="@+id/btn_quit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#8583b7"
+                android:text="Quit"/>
         </LinearLayout>
 
     </RelativeLayout>
